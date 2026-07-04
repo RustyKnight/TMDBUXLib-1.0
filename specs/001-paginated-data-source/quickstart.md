@@ -13,7 +13,7 @@ swift package resolve
 
 ## Validation Scenario 1: Sequential page retrieval (P1)
 1. Run `PaginatedDataSourceSequentialTests` and `PaginatedDataSourceOrderingTests`.
-2. Call `nextPage()` repeatedly for at least three pages in fixture-backed tests.
+2. Call `try await nextPage()` repeatedly for at least three pages in fixture-backed tests.
 3. Verify outcomes are `.page(...)` in sequence and entities are not duplicated.
 
 Expected outcome:
@@ -22,7 +22,7 @@ Expected outcome:
 ## Validation Scenario 2: Exhaustion handling (P2)
 1. Run `PaginatedDataSourceCompletionTests` and `PaginatedDataSourceHasMorePagesTests`.
 2. Consume all pages from a finite fixture.
-3. Call `nextPage()` additional times after exhaustion.
+3. Call `try await nextPage()` additional times after exhaustion.
 4. Observe `isLoading` before and after each request.
 5. Verify `hasLoadedResults` before the first request and after the first request.
 
@@ -34,7 +34,7 @@ Expected outcome:
 ## Validation Scenario 3: Empty-but-valid page (P3)
 1. Run `PaginatedDataSourceEmptyPageTests`.
 2. Configure one page with zero entities.
-3. Retrieve that page with `nextPage()`.
+3. Retrieve that page with `try await nextPage()`.
 
 Expected outcome:
 - `.page([])` is treated as success, not failure.
@@ -43,7 +43,7 @@ Expected outcome:
 ## Validation Scenario 4: Refresh behavior
 1. Run `PaginatedDataSourceRefreshTests`.
 2. Consume one or more pages to change pagination position.
-3. Call `refresh()`.
+3. Call `try await refresh()`.
 
 Expected outcome:
 - `refresh()` returns first-page results.

@@ -10,10 +10,10 @@ public protocol PaginatedDataSource {
     /// Indicates whether any load attempt has been made.
     var hasLoadedResults: Bool { get }
 
-    /// Loads and returns the next page in sequence.
-    func nextPage() async -> PageResult<Entity>
-    /// Resets pagination to the start and returns the freshly loaded first page.
-    func refresh() async -> PageResult<Entity>
+    /// Loads and returns the next page in sequence, or throws if retrieval fails.
+    func nextPage() async throws -> PageResult<Entity>
+    /// Resets pagination to the start and returns the freshly loaded first page, or throws if retrieval fails.
+    func refresh() async throws -> PageResult<Entity>
 }
 
 /// Result of a pagination request.

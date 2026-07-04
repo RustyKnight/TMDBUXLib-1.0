@@ -38,7 +38,7 @@ final class InMemoryPaginatedDataSource<Entity>: PaginatedDataSource {
         InMemoryPaginatedDataSource(pages: pages)
     }
 
-    func nextPage() async -> PageResult<Entity> {
+    func nextPage() async throws -> PageResult<Entity> {
         state.hasLoadedResults = true
         state.isLoading = true
         defer { state.isLoading = false }
@@ -59,9 +59,9 @@ final class InMemoryPaginatedDataSource<Entity>: PaginatedDataSource {
         return .page(page)
     }
 
-    func refresh() async -> PageResult<Entity> {
+    func refresh() async throws -> PageResult<Entity> {
         state.nextIndex = 0
         state.hasMorePages = !pages.isEmpty
-        return await nextPage()
+        return try await nextPage()
     }
 }

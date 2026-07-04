@@ -6,11 +6,12 @@
   - `hasMorePages: Bool` (read-only indicator)
   - `isLoading: Bool` (read-only request activity indicator)
   - `hasLoadedResults: Bool` (read-only first-attempt indicator)
-  - `nextPage() async -> PageResult<Entity>`
-  - `refresh() async -> PageResult<Entity>`
+  - `nextPage() async throws -> PageResult<Entity>`
+  - `refresh() async throws -> PageResult<Entity>`
 - **Validation rules**:
   - Must preserve ordering across sequential `nextPage()` calls (FR-007).
   - Must only allow retrieval of the next page in sequence (FR-003).
+  - Must propagate retrieval errors through thrown failures.
   - `hasMorePages` must reflect whether additional pages remain (FR-002).
   - `isLoading` must be `true` only while a page request is active.
   - `hasLoadedResults` must become `true` after the first load attempt.
