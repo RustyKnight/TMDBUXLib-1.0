@@ -1,0 +1,42 @@
+{
+  "originHash" : "e36be4a6654893af194572134ecf9a7241254eed5d24a5ba0c987506a67b4cc8",
+  "pins" : [
+    {
+      "identity" : "httpclientlib-2.0",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RustyKnight/HTTPClientLib-2.0",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7230532cdcda93986900089f99e777b8d7f82940"
+      }
+    },
+    {
+      "identity" : "imagecachelib-1.0",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RustyKnight/ImageCacheLib-1.0",
+      "state" : {
+        "branch" : "main",
+        "revision" : "8a7b280a9852b32e4c9634c518de85a9b3cf6d6b"
+      }
+    },
+    {
+      "identity" : "supportlib-2.0",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RustyKnight/SupportLib-2.0",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2e29380d8638e6d1dafbed2670de02ba2baf118c"
+      }
+    },
+    {
+      "identity" : "tmdblib-2.0",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RustyKnight/TMDBLib-2.0",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a24be7c844a48db849123f39776432316bec8061"
+      }
+    }
+  ],
+  "version" : 3
+}
