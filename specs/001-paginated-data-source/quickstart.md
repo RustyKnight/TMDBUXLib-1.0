@@ -23,9 +23,13 @@ Expected outcome:
 1. Run `PaginatedDataSourceCompletionTests` and `PaginatedDataSourceHasMorePagesTests`.
 2. Consume all pages from a finite fixture.
 3. Call `nextPage()` additional times after exhaustion.
+4. Observe `isLoading` before and after each request.
+5. Verify `hasLoadedResults` before the first request and after the first request.
 
 Expected outcome:
 - Extra request returns `.noMorePages` and remains distinguishable from `.page(...)` (SC-002).
+- `isLoading` is `false` when no request is actively running.
+- `hasLoadedResults` is `false` before the first request and `true` after a request attempt.
 
 ## Validation Scenario 3: Empty-but-valid page (P3)
 1. Run `PaginatedDataSourceEmptyPageTests`.
@@ -35,6 +39,15 @@ Expected outcome:
 Expected outcome:
 - `.page([])` is treated as success, not failure.
 - Pagination continues to subsequent pages after an empty payload.
+
+## Validation Scenario 4: Refresh behavior
+1. Run `PaginatedDataSourceRefreshTests`.
+2. Consume one or more pages to change pagination position.
+3. Call `refresh()`.
+
+Expected outcome:
+- `refresh()` returns first-page results.
+- Subsequent `nextPage()` continues from the page after refreshed first-page results.
 
 ## Run Validation
 ```bash

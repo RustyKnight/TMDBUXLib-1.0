@@ -5,6 +5,8 @@ final class InMemoryPaginatedDataSource<Entity>: PaginatedDataSource {
     private struct PaginationSessionState {
         var nextIndex: Int
         var hasMorePages: Bool
+        var isLoading: Bool
+        var hasLoadedResults: Bool
     }
 
     private let pages: [[Entity]]
@@ -13,12 +15,22 @@ final class InMemoryPaginatedDataSource<Entity>: PaginatedDataSource {
     var hasMorePages: Bool {
         state.hasMorePages
     }
+    
+    var isLoading: Bool {
+        state.isLoading
+    }
+
+    var hasLoadedResults: Bool {
+        state.hasLoadedResults
+    }
 
     init(pages: [[Entity]]) {
         self.pages = pages
         self.state = PaginationSessionState(
             nextIndex: 0,
-            hasMorePages: !pages.isEmpty
+            hasMorePages: !pages.isEmpty,
+            isLoading: false,
+            hasLoadedResults: false
         )
     }
 
@@ -27,6 +39,10 @@ final class InMemoryPaginatedDataSource<Entity>: PaginatedDataSource {
     }
 
     func nextPage() async -> PageResult<Entity> {
+        state.hasLoadedResults = true
+        state.isLoading = true
+        defer { state.isLoading = false }
+
         guard state.hasMorePages else {
             return .noMorePages
         }
@@ -41,5 +57,11 @@ final class InMemoryPaginatedDataSource<Entity>: PaginatedDataSource {
         state.hasMorePages = state.nextIndex < pages.count
 
         return .page(page)
+    }
+
+    func refresh() async -> PageResult<Entity> {
+        state.nextIndex = 0
+        state.hasMorePages = !pages.isEmpty
+        return await nextPage()
     }
 }
