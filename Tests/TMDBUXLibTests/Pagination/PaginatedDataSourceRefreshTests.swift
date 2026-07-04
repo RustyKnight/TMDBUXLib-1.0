@@ -1,4 +1,5 @@
 import Testing
+@testable import TMDBUXLib
 
 @Test("refresh resets pagination and returns first page")
 func paginatedDataSourceRefreshReturnsFirstPageAfterProgress() async throws {
@@ -27,7 +28,6 @@ func paginatedDataSourceRefreshReloadsFirstPageFromTerminalState() async throws 
     let refreshed = try await dataSource.refresh()
 
     expectPageOutcome(refreshed, entities: [42])
-    #expect(!dataSource.hasMorePages)
-    #expect(dataSource.hasLoadedResults)
+    #expect(dataSource.state == .noMorePage)
     #expect(!dataSource.isLoading)
 }

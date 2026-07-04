@@ -1,17 +1,18 @@
 import Testing
+@testable import TMDBUXLib
 
-@Test("hasMorePages transitions from true to false when exhausted")
-func paginatedDataSourceHasMorePagesTransitionsAtExhaustion() async throws {
+@Test("state transitions from beforeFirstPage to morePages to noMorePage")
+func paginatedDataSourceStateTransitionsAtExhaustion() async throws {
     let dataSource = InMemoryPaginatedDataSource.orderedPages([
         [1],
         [2],
     ])
 
-    #expect(dataSource.hasMorePages)
+    #expect(dataSource.state == .beforeFirstPage)
     _ = try await dataSource.nextPage()
-    #expect(dataSource.hasMorePages)
+    #expect(dataSource.state == .morePages)
     _ = try await dataSource.nextPage()
-    #expect(!dataSource.hasMorePages)
+    #expect(dataSource.state == .noMorePage)
 }
 
 @Test("isLoading is false before and after each load")
@@ -27,16 +28,14 @@ func paginatedDataSourceIsLoadingResetsAfterRequest() async throws {
     #expect(!dataSource.isLoading)
 }
 
-@Test("hasLoadedResults distinguishes not-yet-loaded from exhausted")
-func paginatedDataSourceTracksInitialAndAttemptedLoadState() async throws {
+@Test("state distinguishes not-yet-loaded from exhausted when no pages exist")
+func paginatedDataSourceTracksInitialAndExhaustedStateWithoutPages() async throws {
     let dataSource = InMemoryPaginatedDataSource<Int>.orderedPages([])
 
-    #expect(!dataSource.hasMorePages)
-    #expect(!dataSource.hasLoadedResults)
+    #expect(dataSource.state == .beforeFirstPage)
 
     let outcome = try await dataSource.nextPage()
     expectNoMorePages(outcome)
 
-    #expect(!dataSource.hasMorePages)
-    #expect(dataSource.hasLoadedResults)
+    #expect(dataSource.state == .noMorePage)
 }

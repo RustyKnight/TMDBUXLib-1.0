@@ -24,12 +24,12 @@ Expected outcome:
 2. Consume all pages from a finite fixture.
 3. Call `try await nextPage()` additional times after exhaustion.
 4. Observe `isLoading` before and after each request.
-5. Verify `hasLoadedResults` before the first request and after the first request.
+5. Verify `state` starts at `.beforeFirstPage` and transitions to `.morePages` / `.noMorePage`.
 
 Expected outcome:
 - Extra request returns `.noMorePages` and remains distinguishable from `.page(...)` (SC-002).
 - `isLoading` is `false` when no request is actively running.
-- `hasLoadedResults` is `false` before the first request and `true` after a request attempt.
+- `state` communicates whether no load has occurred yet (`.beforeFirstPage`) or exhaustion has been reached (`.noMorePage`).
 
 ## Validation Scenario 3: Empty-but-valid page (P3)
 1. Run `PaginatedDataSourceEmptyPageTests`.

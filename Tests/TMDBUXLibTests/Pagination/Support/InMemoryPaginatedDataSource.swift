@@ -4,33 +4,27 @@ import Foundation
 final class InMemoryPaginatedDataSource<Entity>: PaginatedDataSource {
     private struct PaginationSessionState {
         var nextIndex: Int
-        var hasMorePages: Bool
+        var state: PaginationState
         var isLoading: Bool
-        var hasLoadedResults: Bool
     }
 
     private let pages: [[Entity]]
-    private var state: PaginationSessionState
+    private var sessionState: PaginationSessionState
 
-    var hasMorePages: Bool {
-        state.hasMorePages
+    var state: PaginationState {
+        sessionState.state
     }
     
     var isLoading: Bool {
-        state.isLoading
-    }
-
-    var hasLoadedResults: Bool {
-        state.hasLoadedResults
+        sessionState.isLoading
     }
 
     init(pages: [[Entity]]) {
         self.pages = pages
-        self.state = PaginationSessionState(
+        self.sessionState = PaginationSessionState(
             nextIndex: 0,
-            hasMorePages: !pages.isEmpty,
-            isLoading: false,
-            hasLoadedResults: false
+            state: .beforeFirstPage,
+            isLoading: false
         )
     }
 
@@ -39,29 +33,24 @@ final class InMemoryPaginatedDataSource<Entity>: PaginatedDataSource {
     }
 
     func nextPage() async throws -> PageResult<Entity> {
-        state.hasLoadedResults = true
-        state.isLoading = true
-        defer { state.isLoading = false }
+        sessionState.isLoading = true
+        defer { sessionState.isLoading = false }
 
-        guard state.hasMorePages else {
+        guard sessionState.nextIndex < pages.count else {
+            sessionState.state = .noMorePage
             return .noMorePages
         }
 
-        guard state.nextIndex < pages.count else {
-            state.hasMorePages = false
-            return .noMorePages
-        }
-
-        let page = pages[state.nextIndex]
-        state.nextIndex += 1
-        state.hasMorePages = state.nextIndex < pages.count
+        let page = pages[sessionState.nextIndex]
+        sessionState.nextIndex += 1
+        sessionState.state = sessionState.nextIndex < pages.count ? .morePages : .noMorePage
 
         return .page(page)
     }
 
     func refresh() async throws -> PageResult<Entity> {
-        state.nextIndex = 0
-        state.hasMorePages = !pages.isEmpty
+        sessionState.nextIndex = 0
+        sessionState.state = .beforeFirstPage
         return try await nextPage()
     }
 }
