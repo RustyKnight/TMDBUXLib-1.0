@@ -15,6 +15,10 @@ public protocol PaginatedDataSource {
     func refresh() async throws -> PageResult<Entity>
 }
 
+public protocol SearchablePaginatedDataSource: PaginatedDataSource {
+    var searchTerm: String? { get set }
+}
+
 public enum PaginationState {
     case beforeFirstPage
     case morePages
@@ -38,6 +42,7 @@ public enum PageResult<Entity> {
 8. Empty page payloads (`entities.isEmpty`) are valid `.page` results.
 9. Page ordering must be preserved for all consecutive calls within a session.
 10. `refresh()` resets pagination to the start, returns the newly loaded first-page result, and may throw retrieval errors.
+11. Search-specific sources should conform to `SearchablePaginatedDataSource` to expose `searchTerm` consistently.
 
 ## Compatibility Notes
 - API naming must follow Swift conventions (camelCase, no underscore separators).

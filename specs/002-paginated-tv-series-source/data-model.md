@@ -1,7 +1,7 @@
 # Data Model: Paginated TV Series Data Source
 
 ## Entity: PaginatedTVSeriesDataSource
-- **Purpose**: Concrete `PaginatedDataSource` implementation for TMDB TV search pagination.
+- **Purpose**: Concrete `SearchablePaginatedDataSource` implementation for TMDB TV search pagination.
 - **Core fields**:
   - `tmdbClient: TMDBClient`
   - `searchTerm: String?`

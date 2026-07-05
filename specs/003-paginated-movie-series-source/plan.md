@@ -1,18 +1,18 @@
-# Implementation Plan: Paginated Movie Series Data Source
+# Implementation Plan: Paginated Movie Data Source
 
 **Branch**: `[feature/003-paginated-movie-series-source]` | **Date**: 2026-07-05 | **Spec**: [specs/003-paginated-movie-series-source/spec.md](./spec.md)
 
-**Input**: Feature specification from `/specs/003-paginated-movie-series-source/spec.md` and source plan context from `/Docs/TMDBUX/004-PaginatedMovieSeriesDataSource/Plan.md`
+**Input**: Feature specification from `/specs/003-paginated-movie-series-source/spec.md` and source plan context from `/Docs/TMDBUX/004-PaginatedMovieDataSource/Plan.md`
 
 ## Summary
 
-Implement a `PaginatedDataSource`-conforming movie search source backed by `TMDBClient.searchMovies`, with explicit missing-search-term failure, optional query filters (`language`, `region`, `includeAdult`, `firstAirDateYear`, `primaryReleaseYear`), and deterministic pagination reset when `searchTerm` changes.
+Implement a `SearchablePaginatedDataSource`-conforming movie search source backed by `TMDBClient.searchMovies`, with explicit missing-search-term failure, optional query filters (`language`, `region`, `includeAdult`, `firstAirDateYear`, `primaryReleaseYear`), and deterministic pagination reset when `searchTerm` changes.
 
 ## Technical Context
 
 **Language/Version**: Swift 6 mode (`swift-tools-version: 6.3`)
 
-**Primary Dependencies**: Swift concurrency (`async/await`), `TMDBLib` (`TMDBClient`, paged movie search payloads), existing `PaginatedDataSource` contract in `TMDBUXLib`
+**Primary Dependencies**: Swift concurrency (`async/await`), `TMDBLib` (`TMDBClient`, paged movie search payloads), existing `SearchablePaginatedDataSource` contract in `TMDBUXLib`
 
 **Storage**: N/A (in-memory pagination/session state only)
 
@@ -52,7 +52,7 @@ specs/003-paginated-movie-series-source/
 ├── data-model.md
 ├── quickstart.md
 ├── contracts/
-│   └── paginated-movie-series-data-source.md
+│   └── paginated-movie-data-source.md
 └── tasks.md             # Created in Phase 2 by /speckit.tasks
 ```
 
@@ -66,7 +66,7 @@ Sources/
     └── Pagination/
         ├── PaginatedDataSource.swift
         ├── PaginatedTVSeriesDataSource.swift
-        └── PaginatedMovieSeriesDataSource.swift   # planned
+        └── PaginatedMovieDataSource.swift   # planned
 
 Tests/
 └── TMDBUXLibTests/
@@ -74,7 +74,7 @@ Tests/
         ├── Support/
         ├── PaginatedDataSource*Tests.swift
         ├── PaginatedTVSeriesDataSource*Tests.swift
-        └── PaginatedMovieSeriesDataSource*Tests.swift   # planned
+        └── PaginatedMovieDataSource*Tests.swift   # planned
 ```
 
 **Structure Decision**: Keep the existing single Swift package layout and add movie-search-specific pagination source/test types under existing `TMDBUXLib` and `TMDBUXLibTests/Pagination` areas. Feature planning artifacts stay scoped to `specs/003-paginated-movie-series-source/`.

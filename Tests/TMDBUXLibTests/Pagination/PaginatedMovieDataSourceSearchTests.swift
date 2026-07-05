@@ -7,7 +7,7 @@ func paginatedMovieSeriesDataSourceReturnsFirstPageForValidTerm() async throws {
     let firstFixture = try MoviePageFixtures.page(number: 1, totalPages: 2, ids: [101, 102])
     await clientSpy.enqueueResponse(firstFixture.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,
@@ -37,7 +37,7 @@ func paginatedMovieSeriesDataSourceProgressesThroughPages() async throws {
     await clientSpy.enqueueResponse(secondFixture.payload)
     await clientSpy.enqueueResponse(thirdFixture.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,
@@ -67,7 +67,7 @@ func paginatedMovieSeriesDataSourceReturnsNoMorePagesAfterExhaustion() async thr
     let singleFixture = try MoviePageFixtures.page(number: 1, totalPages: 1, ids: [42])
     await clientSpy.enqueueResponse(singleFixture.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,
@@ -91,7 +91,7 @@ func paginatedMovieSeriesDataSourceTreatsEmptyPageAsSuccess() async throws {
     let emptyFixture = try MoviePageFixtures.page(number: 1, totalPages: 1, ids: [])
     await clientSpy.enqueueResponse(emptyFixture.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,

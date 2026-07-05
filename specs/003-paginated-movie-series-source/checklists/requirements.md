@@ -1,4 +1,4 @@
-# Specification Quality Checklist: Paginated Movie Series Data Source
+# Specification Quality Checklist: Paginated Movie Data Source
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-07-05

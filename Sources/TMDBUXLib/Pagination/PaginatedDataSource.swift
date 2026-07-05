@@ -14,6 +14,12 @@ public protocol PaginatedDataSource {
     func refresh() async throws -> PageResult<Entity>
 }
 
+/// Contract for paginated retrieval filtered by an optional search term.
+public protocol SearchablePaginatedDataSource: PaginatedDataSource {
+    /// Current search term used to filter paginated results.
+    var searchTerm: String? { get set }
+}
+
 /// Current state of pagination progress.
 public enum PaginationState {
     /// No page has been loaded yet.

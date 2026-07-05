@@ -1,4 +1,4 @@
-# Phase 0 Research: Paginated Movie Series Data Source
+# Phase 0 Research: Paginated Movie Data Source
 
 ## Decision 1: Use `TMDBClient.searchMovies` as the only page-fetch primitive
 - **Decision**: Implement retrieval via `TMDBClient.searchMovies(query:page:language:region:includeAdult:firstAirDateYear:primaryReleaseYear:...)`.

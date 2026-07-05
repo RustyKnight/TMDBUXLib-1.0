@@ -32,7 +32,7 @@ func expectMovieMissingSearchTerm(
         _ = try await operation()
         Issue.record("Expected missing search term error")
     } catch {
-        #expect(error as? PaginatedMovieSeriesDataSourceError == .missingSearchTerm)
+        #expect(error as? PaginatedMovieDataSourceError == .missingSearchTerm)
     }
 }
 

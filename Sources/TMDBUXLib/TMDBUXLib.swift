@@ -2,6 +2,9 @@
 ///
 /// Pagination contract types exposed by this module:
 /// - ``PaginatedDataSource``
+/// - ``SearchablePaginatedDataSource``
+/// - ``PaginatedTVSeriesDataSource``
+/// - ``PaginatedMovieDataSource``
 /// - ``PageResult``
 public enum TMDBUXLib {}
 

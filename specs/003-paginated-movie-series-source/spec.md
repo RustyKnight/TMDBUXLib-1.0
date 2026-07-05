@@ -1,4 +1,4 @@
-# Feature Specification: Paginated Movie Series Data Source
+# Feature Specification: Paginated Movie Data Source
 
 **Feature Branch**: `[003-paginated-movie-series-source]`
 
@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: Source description from `/Docs/TMDBUX/004-PaginatedMovieSeriesDataSource/Spec.md`
+**Input**: Source description from `/Docs/TMDBUX/004-PaginatedMovieDataSource/Spec.md`
 
 ## User Scenarios & Testing *(mandatory)*
 

@@ -4,7 +4,7 @@ import Testing
 @Test("Movie paginated source initializes with expected base state")
 func paginatedMovieSeriesDataSourceInitialization() async throws {
     let clientSpy = TMDBSearchMoviesClientSpy()
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: "en-US",
         region: "US",

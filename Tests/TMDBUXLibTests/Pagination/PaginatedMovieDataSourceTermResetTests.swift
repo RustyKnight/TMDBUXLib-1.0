@@ -7,7 +7,7 @@ func paginatedMovieSeriesDataSourceResetsStateWhenSearchTermChanges() async thro
     let termAPage1 = try MoviePageFixtures.page(number: 1, totalPages: 2, ids: [11, 12])
     await clientSpy.enqueueResponse(termAPage1.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,
@@ -32,7 +32,7 @@ func paginatedMovieSeriesDataSourceRestartsFromPageOneForNewTerm() async throws 
     await clientSpy.enqueueResponse(termAPage1.payload)
     await clientSpy.enqueueResponse(termBPage1.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,
@@ -63,7 +63,7 @@ func paginatedMovieSeriesDataSourceRefreshRestartsCurrentTerm() async throws {
     await clientSpy.enqueueResponse(page2.payload)
     await clientSpy.enqueueResponse(refreshedPage1.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,

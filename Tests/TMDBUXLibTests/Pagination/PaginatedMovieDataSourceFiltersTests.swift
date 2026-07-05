@@ -7,7 +7,7 @@ func paginatedMovieSeriesDataSourceNextPageForwardsFilters() async throws {
     let fixture = try MoviePageFixtures.page(number: 1, totalPages: 1, ids: [88])
     await clientSpy.enqueueResponse(fixture.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: "es-ES",
         region: "ES",
@@ -41,7 +41,7 @@ func paginatedMovieSeriesDataSourceFiltersPersistAcrossPages() async throws {
     await clientSpy.enqueueResponse(first.payload)
     await clientSpy.enqueueResponse(second.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: "fr-FR",
         region: "FR",
@@ -86,7 +86,7 @@ func paginatedMovieSeriesDataSourceRefreshForwardsFilters() async throws {
     await clientSpy.enqueueResponse(first.payload)
     await clientSpy.enqueueResponse(refreshed.payload)
 
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: "de-DE",
         region: "DE",

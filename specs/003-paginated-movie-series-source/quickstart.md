@@ -1,4 +1,4 @@
-# Quickstart: Validate Paginated Movie Series Data Source
+# Quickstart: Validate Paginated Movie Data Source
 
 ## Prerequisites
 - Swift toolchain supporting `swift-tools-version: 6.3`
@@ -54,11 +54,11 @@ Expected outcome:
 
 ## Run Validation
 ```bash
-swift test --filter PaginatedMovieSeriesDataSource
+swift test --filter PaginatedMovieDataSource
 swift test
 ```
 
 Expected outcome:
 - Test suite passes with behavior matching:
   - [data-model.md](./data-model.md)
-  - [contracts/paginated-movie-series-data-source.md](./contracts/paginated-movie-series-data-source.md)
+  - [contracts/paginated-movie-data-source.md](./contracts/paginated-movie-data-source.md)

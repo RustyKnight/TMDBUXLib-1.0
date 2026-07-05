@@ -4,7 +4,7 @@ import Testing
 @Test("nextPage fails with missingSearchTerm when search term is not set")
 func paginatedMovieSeriesDataSourceNextPageFailsWithoutSearchTerm() async throws {
     let clientSpy = TMDBSearchMoviesClientSpy()
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,
@@ -21,7 +21,7 @@ func paginatedMovieSeriesDataSourceNextPageFailsWithoutSearchTerm() async throws
 @Test("refresh fails with missingSearchTerm when search term is not set")
 func paginatedMovieSeriesDataSourceRefreshFailsWithoutSearchTerm() async throws {
     let clientSpy = TMDBSearchMoviesClientSpy()
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,
@@ -38,7 +38,7 @@ func paginatedMovieSeriesDataSourceRefreshFailsWithoutSearchTerm() async throws 
 @Test("whitespace-only search term fails with missingSearchTerm")
 func paginatedMovieSeriesDataSourceWhitespaceOnlyTermFailsValidation() async throws {
     let clientSpy = TMDBSearchMoviesClientSpy()
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,
@@ -56,7 +56,7 @@ func paginatedMovieSeriesDataSourceWhitespaceOnlyTermFailsValidation() async thr
 @Test("searchTerm assignment configures source without implicit I/O")
 func paginatedMovieSeriesDataSourceSearchTermAssignmentDoesNotFetch() async throws {
     let clientSpy = TMDBSearchMoviesClientSpy()
-    let dataSource = TMDBPaginatedMovieSeriesDataSource(
+    let dataSource = TMDBPaginatedMovieDataSource(
         tmdbClient: clientSpy.tmdbClient,
         language: nil,
         region: nil,

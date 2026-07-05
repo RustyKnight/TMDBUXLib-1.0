@@ -5,7 +5,7 @@ public enum PaginatedTVSeriesDataSourceError: Error, Equatable {
     case missingSearchTerm
 }
 
-public protocol PaginatedTVSeriesDataSource: PaginatedDataSource
+public protocol PaginatedTVSeriesDataSource: SearchablePaginatedDataSource
 where Entity == TVSeriesListResult {
     init(
         tmdbClient: TMDBClient,
@@ -13,8 +13,6 @@ where Entity == TVSeriesListResult {
         includeAdult: Bool?,
         firstAirDateYear: Int?
     )
-
-    var searchTerm: String? { get set }
 }
 
 public final class TMDBPaginatedTVSeriesDataSource: PaginatedTVSeriesDataSource {

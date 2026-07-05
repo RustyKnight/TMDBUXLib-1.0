@@ -1,11 +1,11 @@
 import Foundation
 import TMDBLib
 
-public enum PaginatedMovieSeriesDataSourceError: Error, Equatable {
+public enum PaginatedMovieDataSourceError: Error, Equatable {
     case missingSearchTerm
 }
 
-public protocol PaginatedMovieSeriesDataSource: PaginatedDataSource
+public protocol PaginatedMovieDataSource: SearchablePaginatedDataSource
 where Entity == MovieListResult {
     init(
         tmdbClient: TMDBClient,
@@ -15,11 +15,9 @@ where Entity == MovieListResult {
         firstAirDateYear: Int?,
         primaryReleaseYear: Int?
     )
-
-    var searchTerm: String? { get set }
 }
 
-public final class TMDBPaginatedMovieSeriesDataSource: PaginatedMovieSeriesDataSource {
+public final class TMDBPaginatedMovieDataSource: PaginatedMovieDataSource {
     public typealias Entity = MovieListResult
 
     private struct SearchRequest {
@@ -119,7 +117,7 @@ public final class TMDBPaginatedMovieSeriesDataSource: PaginatedMovieSeriesDataS
 
     private func validatedSearchTerm() throws -> String {
         guard let searchTerm = normalized(searchTerm) else {
-            throw PaginatedMovieSeriesDataSourceError.missingSearchTerm
+            throw PaginatedMovieDataSourceError.missingSearchTerm
         }
         return searchTerm
     }

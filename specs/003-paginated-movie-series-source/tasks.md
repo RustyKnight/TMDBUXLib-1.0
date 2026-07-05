@@ -1,4 +1,4 @@
-# Tasks: Paginated Movie Series Data Source
+# Tasks: Paginated Movie Data Source
 
 **Input**: Design documents from `/specs/003-paginated-movie-series-source/`
 
@@ -18,8 +18,8 @@
 
 **Purpose**: Create the feature file/test layout in the existing Swift package structure.
 
-- [X] T001 Create movie pagination source scaffold in `Sources/TMDBUXLib/Pagination/PaginatedMovieSeriesDataSource.swift`
-- [X] T002 Create movie pagination test suite scaffolds in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceSearchTests.swift`, `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceMissingTermTests.swift`, `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceTermResetTests.swift`, `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceFiltersTests.swift`, and `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceInitializationTests.swift`
+- [X] T001 Create movie pagination source scaffold in `Sources/TMDBUXLib/Pagination/PaginatedMovieDataSource.swift`
+- [X] T002 Create movie pagination test suite scaffolds in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceSearchTests.swift`, `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceMissingTermTests.swift`, `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceTermResetTests.swift`, `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceFiltersTests.swift`, and `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceInitializationTests.swift`
 
 ---
 
@@ -31,9 +31,9 @@
 
 - [X] T003 [P] Implement deterministic movie search client spy in `Tests/TMDBUXLibTests/Pagination/Support/TMDBSearchMoviesClientSpy.swift`
 - [X] T004 [P] Implement movie page fixture builders in `Tests/TMDBUXLibTests/Pagination/Support/MoviePageFixtures.swift`
-- [X] T005 [P] Implement movie pagination assertion helpers in `Tests/TMDBUXLibTests/Pagination/Support/PaginatedMovieSeriesAssertions.swift`
-- [X] T006 Implement base movie data-source types/properties (`PaginatedMovieSeriesDataSourceError`, `PaginatedMovieSeriesDataSource`, state, initializer, request builder) in `Sources/TMDBUXLib/Pagination/PaginatedMovieSeriesDataSource.swift`
-- [X] T007 Add initialization/default behavior coverage in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceInitializationTests.swift`
+- [X] T005 [P] Implement movie pagination assertion helpers in `Tests/TMDBUXLibTests/Pagination/Support/PaginatedMovieAssertions.swift`
+- [X] T006 Implement base movie data-source types/properties (`PaginatedMovieDataSourceError`, `PaginatedMovieDataSource`, state, initializer, request builder) in `Sources/TMDBUXLib/Pagination/PaginatedMovieDataSource.swift`
+- [X] T007 Add initialization/default behavior coverage in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceInitializationTests.swift`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin.
 
@@ -47,12 +47,12 @@
 
 ### Tests for User Story 1
 
-- [X] T008 [US1] Add first-page and sequential-page retrieval tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceSearchTests.swift`
-- [X] T009 [US1] Add exhaustion and empty-page-success tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceSearchTests.swift`
+- [X] T008 [US1] Add first-page and sequential-page retrieval tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceSearchTests.swift`
+- [X] T009 [US1] Add exhaustion and empty-page-success tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceSearchTests.swift`
 
 ### Implementation for User Story 1
 
-- [X] T010 [US1] Implement `nextPage()` movie retrieval, page-index progression, and `.noMorePages` handling in `Sources/TMDBUXLib/Pagination/PaginatedMovieSeriesDataSource.swift`
+- [X] T010 [US1] Implement `nextPage()` movie retrieval, page-index progression, and `.noMorePages` handling in `Sources/TMDBUXLib/Pagination/PaginatedMovieDataSource.swift`
 
 **Checkpoint**: User Story 1 is independently functional and testable.
 
@@ -62,15 +62,15 @@
 
 **Goal**: Return explicit `missingSearchTerm` failures for retrieval attempts without a valid non-whitespace term.
 
-**Independent Test**: Leave `searchTerm` unset/blank, call both `nextPage()` and `refresh()`, verify `PaginatedMovieSeriesDataSourceError.missingSearchTerm`.
+**Independent Test**: Leave `searchTerm` unset/blank, call both `nextPage()` and `refresh()`, verify `PaginatedMovieDataSourceError.missingSearchTerm`.
 
 ### Tests for User Story 2
 
-- [X] T011 [US2] Add missing-term validation tests for `nextPage()`, `refresh()`, and whitespace terms in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceMissingTermTests.swift`
+- [X] T011 [US2] Add missing-term validation tests for `nextPage()`, `refresh()`, and whitespace terms in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceMissingTermTests.swift`
 
 ### Implementation for User Story 2
 
-- [X] T012 [US2] Implement validated-search-term guard and explicit `missingSearchTerm` failures in `Sources/TMDBUXLib/Pagination/PaginatedMovieSeriesDataSource.swift`
+- [X] T012 [US2] Implement validated-search-term guard and explicit `missingSearchTerm` failures in `Sources/TMDBUXLib/Pagination/PaginatedMovieDataSource.swift`
 
 **Checkpoint**: User Story 2 is independently functional and testable.
 
@@ -84,12 +84,12 @@
 
 ### Tests for User Story 3
 
-- [X] T013 [US3] Add term-change reset and page-one restart tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceTermResetTests.swift`
-- [X] T014 [US3] Add no-implicit-fetch and refresh-restart tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceTermResetTests.swift`
+- [X] T013 [US3] Add term-change reset and page-one restart tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceTermResetTests.swift`
+- [X] T014 [US3] Add no-implicit-fetch and refresh-restart tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceTermResetTests.swift`
 
 ### Implementation for User Story 3
 
-- [X] T015 [US3] Implement `searchTerm` change reset semantics and `refresh()` restart flow in `Sources/TMDBUXLib/Pagination/PaginatedMovieSeriesDataSource.swift`
+- [X] T015 [US3] Implement `searchTerm` change reset semantics and `refresh()` restart flow in `Sources/TMDBUXLib/Pagination/PaginatedMovieDataSource.swift`
 
 **Checkpoint**: User Story 3 is independently functional and testable.
 
@@ -103,12 +103,12 @@
 
 ### Tests for User Story 4
 
-- [X] T016 [US4] Add optional-filter forwarding tests for `nextPage()` and `refresh()` in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceFiltersTests.swift`
-- [X] T017 [US4] Add multi-page filter persistence tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceFiltersTests.swift`
+- [X] T016 [US4] Add optional-filter forwarding tests for `nextPage()` and `refresh()` in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceFiltersTests.swift`
+- [X] T017 [US4] Add multi-page filter persistence tests in `Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceFiltersTests.swift`
 
 ### Implementation for User Story 4
 
-- [X] T018 [US4] Implement filter storage and forwarding (`language`, `region`, `includeAdult`, `firstAirDateYear`, `primaryReleaseYear`) in `Sources/TMDBUXLib/Pagination/PaginatedMovieSeriesDataSource.swift`
+- [X] T018 [US4] Implement filter storage and forwarding (`language`, `region`, `includeAdult`, `firstAirDateYear`, `primaryReleaseYear`) in `Sources/TMDBUXLib/Pagination/PaginatedMovieDataSource.swift`
 
 **Checkpoint**: User Story 4 is independently functional and testable.
 
@@ -118,9 +118,9 @@
 
 **Purpose**: Final consistency, docs alignment, and full regression validation.
 
-- [X] T019 [P] Align movie-source public contract notes with implemented behavior in `specs/003-paginated-movie-series-source/contracts/paginated-movie-series-data-source.md`
+- [X] T019 [P] Align movie-source public contract notes with implemented behavior in `specs/003-paginated-movie-series-source/contracts/paginated-movie-data-source.md`
 - [X] T020 [P] Align runnable validation steps with final test coverage in `specs/003-paginated-movie-series-source/quickstart.md`
-- [X] T021 Run full package regression (`swift test`) and resolve any failures in `Sources/TMDBUXLib/Pagination/PaginatedMovieSeriesDataSource.swift` and `Tests/TMDBUXLibTests/Pagination/`
+- [X] T021 Run full package regression (`swift test`) and resolve any failures in `Sources/TMDBUXLib/Pagination/PaginatedMovieDataSource.swift` and `Tests/TMDBUXLibTests/Pagination/`
 
 ---
 
@@ -146,7 +146,7 @@
 ### Within Each User Story
 
 - Write tests first and confirm they fail before implementation changes.
-- Implement source behavior in `PaginatedMovieSeriesDataSource.swift`.
+- Implement source behavior in `PaginatedMovieDataSource.swift`.
 - Re-run story-specific tests before moving to the next story.
 
 ### Parallel Opportunities
@@ -163,12 +163,12 @@
 # Parallel test-support work before US1
 Task: "T003 Implement deterministic movie search client spy in Tests/TMDBUXLibTests/Pagination/Support/TMDBSearchMoviesClientSpy.swift"
 Task: "T004 Implement movie page fixture builders in Tests/TMDBUXLibTests/Pagination/Support/MoviePageFixtures.swift"
-Task: "T005 Implement movie pagination assertion helpers in Tests/TMDBUXLibTests/Pagination/Support/PaginatedMovieSeriesAssertions.swift"
+Task: "T005 Implement movie pagination assertion helpers in Tests/TMDBUXLibTests/Pagination/Support/PaginatedMovieAssertions.swift"
 
 # After support is complete, US1 test + implementation flow
-Task: "T008 Add first-page and sequential-page retrieval tests in Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceSearchTests.swift"
-Task: "T009 Add exhaustion and empty-page-success tests in Tests/TMDBUXLibTests/Pagination/PaginatedMovieSeriesDataSourceSearchTests.swift"
-Task: "T010 Implement nextPage() movie retrieval and pagination state flow in Sources/TMDBUXLib/Pagination/PaginatedMovieSeriesDataSource.swift"
+Task: "T008 Add first-page and sequential-page retrieval tests in Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceSearchTests.swift"
+Task: "T009 Add exhaustion and empty-page-success tests in Tests/TMDBUXLibTests/Pagination/PaginatedMovieDataSourceSearchTests.swift"
+Task: "T010 Implement nextPage() movie retrieval and pagination state flow in Sources/TMDBUXLib/Pagination/PaginatedMovieDataSource.swift"
 ```
 
 ---

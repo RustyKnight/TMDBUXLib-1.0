@@ -6,13 +6,13 @@
 
 ## Summary
 
-Implement a `PaginatedDataSource`-conforming TV series search source backed by `TMDBClient.searchTV`, with explicit missing-search-term failure, optional query filters (language/includeAdult/firstAirDateYear), and deterministic pagination reset when `searchTerm` changes.
+Implement a `SearchablePaginatedDataSource`-conforming TV series search source backed by `TMDBClient.searchTV`, with explicit missing-search-term failure, optional query filters (language/includeAdult/firstAirDateYear), and deterministic pagination reset when `searchTerm` changes.
 
 ## Technical Context
 
 **Language/Version**: Swift 6 mode (`swift-tools-version: 6.3`)
 
-**Primary Dependencies**: Swift concurrency (`async/await`), `TMDBLib` (`TMDBClient`, `Page<TVSeriesListResult>`), existing `PaginatedDataSource` contract in `TMDBUXLib`
+**Primary Dependencies**: Swift concurrency (`async/await`), `TMDBLib` (`TMDBClient`, `Page<TVSeriesListResult>`), existing `SearchablePaginatedDataSource` contract in `TMDBUXLib`
 
 **Storage**: N/A (in-memory pagination/session state only)
 

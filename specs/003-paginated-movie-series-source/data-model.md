@@ -1,7 +1,7 @@
-# Data Model: Paginated Movie Series Data Source
+# Data Model: Paginated Movie Data Source
 
-## Entity: PaginatedMovieSeriesDataSource
-- **Purpose**: Concrete `PaginatedDataSource` implementation for TMDB movie search pagination.
+## Entity: PaginatedMovieDataSource
+- **Purpose**: Concrete `SearchablePaginatedDataSource` implementation for TMDB movie search pagination.
 - **Core fields**:
   - `tmdbClient: TMDBClient`
   - `searchTerm: String?`
@@ -45,7 +45,7 @@
   - Empty `results` is valid and mapped to `.page([])` when request succeeds.
   - When next page would exceed `totalPages`, outcome is `.noMorePages`.
 
-## Entity: PaginatedMovieSeriesDataSourceError
+## Entity: PaginatedMovieDataSourceError
 - **Purpose**: Domain error surface for invalid retrieval preconditions.
 - **Cases**:
   - `missingSearchTerm`

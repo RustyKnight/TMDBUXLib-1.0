@@ -1,4 +1,4 @@
-# Contract: Paginated Movie Series Data Source Public Interface
+# Contract: Paginated Movie Data Source Public Interface
 
 ## Overview
 This contract defines a movie-search-specific paginated data source backed by `TMDBClient.searchMovies`.
@@ -7,11 +7,11 @@ This contract defines a movie-search-specific paginated data source backed by `T
 ```swift
 import TMDBLib
 
-public enum PaginatedMovieSeriesDataSourceError: Error {
+public enum PaginatedMovieDataSourceError: Error {
     case missingSearchTerm
 }
 
-public protocol PaginatedMovieSeriesDataSource: PaginatedDataSource
+public protocol PaginatedMovieDataSource: SearchablePaginatedDataSource
 where Entity == MovieListResult {
     init(
         tmdbClient: TMDBClient,
@@ -21,14 +21,12 @@ where Entity == MovieListResult {
         firstAirDateYear: Int?,
         primaryReleaseYear: Int?
     )
-
-    var searchTerm: String? { get set }
 }
 ```
 
 ## Behavioral Rules (normative)
 1. `searchTerm` must be set to a non-empty, non-whitespace value before `nextPage()` or `refresh()` can succeed.
-2. If retrieval is requested without a valid `searchTerm`, the call fails with `PaginatedMovieSeriesDataSourceError.missingSearchTerm`.
+2. If retrieval is requested without a valid `searchTerm`, the call fails with `PaginatedMovieDataSourceError.missingSearchTerm`.
 3. Assigning/changing `searchTerm` resets pagination state to `.beforeFirstPage` and discards prior session progress/results.
 4. Assigning/changing `searchTerm` does not trigger retrieval automatically.
 5. `nextPage()` requests `TMDBClient.searchMovies` with current term, current page index, and configured optional filters.
@@ -43,7 +41,7 @@ where Entity == MovieListResult {
 - No additional package dependency is required beyond existing `TMDBLib` integration.
 
 ## Usage Notes
-- Instantiate `TMDBPaginatedMovieSeriesDataSource` with `TMDBClient` and optional filters, then set `searchTerm`.
+- Instantiate `TMDBPaginatedMovieDataSource` with `TMDBClient` and optional filters, then set `searchTerm`.
 - Call `try await nextPage()` to begin retrieval.
 - Use `try await refresh()` to restart paging for the current term.
 - Repeated `nextPage()` after exhaustion should remain stable and keep returning `.noMorePages`.
