@@ -1,5 +1,5 @@
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan
-at specs/002-paginated-tv-series-source/plan.md
+at specs/004-search-view-ui/plan.md
 <!-- SPECKIT END -->
