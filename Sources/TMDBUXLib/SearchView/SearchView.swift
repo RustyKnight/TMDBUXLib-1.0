@@ -1,14 +1,18 @@
 import SwiftUI
+import TMDBLib
 
 /// Reusable search UI that binds a view model to caller-provided factory views.
 public struct SearchView<Model: SearchViewModeling, Factory: SearchViewFactory>: View
 where Model.Entity == Factory.Entity, Model.Entity: Identifiable {
     @ObservedObject private var viewModel: Model
     private let factory: Factory
+    private let tmdbClient: TMDBClient
 
-    public init(viewModel: Model, factory: Factory) {
+    /// Creates a search view and injects the shared `TMDBClient` into the environment for child content.
+    public init(viewModel: Model, factory: Factory, tmdbClient: TMDBClient) {
         self.viewModel = viewModel
         self.factory = factory
+        self.tmdbClient = tmdbClient
     }
 
     public var body: some View {
@@ -26,6 +30,7 @@ where Model.Entity == Factory.Entity, Model.Entity: Identifiable {
 
             content
         }
+        .environment(\.tmdbClient, tmdbClient)
     }
 
     private var searchTermBinding: Binding<String> {

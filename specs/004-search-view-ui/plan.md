@@ -32,6 +32,7 @@ Design a reusable SwiftUI search view surface for TMDB movie/TV results that use
 - Search term must be non-empty/non-whitespace before starting search.
 - New search must clear previous results before first-page loading appears.
 - Item selection type must match data-source entity type (single generic entity).
+- `SearchView` requires a non-optional `TMDBClient` and shares it with composed child content via environment.
 - Reuse existing package dependencies only (`TMDBLib`, `ImageCacheLib` present in package).
 
 **Scale/Scope**: One generic search-view contract + search-state model + view-model/adapter behavior covering initial load, empty/error outcomes, pagination, and single selection; no persistence, no ranking logic changes, no external navigation flow ownership.
@@ -75,6 +76,7 @@ Sources/
         ├── SearchViewFactory.swift
         ├── SearchViewModel.swift
         ├── SearchView.swift
+        ├── TMDBClientEnvironment.swift
         └── TVSeries/
             └── TVSeriesSearchViewFactory.swift
 

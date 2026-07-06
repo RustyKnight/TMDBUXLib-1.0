@@ -4,6 +4,7 @@
 - Swift toolchain supporting `swift-tools-version: 6.3`
 - Package dependencies resolved (`TMDBLib`, `ImageCacheLib`)
 - Deterministic searchable paginated source doubles and view-factory stubs in test target
+- A concrete `TMDBClient` instance available for `SearchView` construction
 - Concrete TV-series factory example: `Sources/TMDBUXLib/SearchView/TVSeries/TVSeriesSearchViewFactory.swift`
 
 ## Setup
@@ -12,6 +13,11 @@ From repository root:
 ```bash
 swift package resolve
 ```
+
+## Wiring `SearchView`
+1. Create/configure a `TMDBClient`.
+2. Construct `SearchView` with `viewModel`, `factory`, and `tmdbClient`.
+3. Access the shared client in child views with `@Environment(\.tmdbClient)`.
 
 ## Validation Scenario 1: Initial/valid search flow (P1)
 1. Start with empty UI (`noSearch`).

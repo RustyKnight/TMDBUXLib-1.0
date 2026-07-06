@@ -22,11 +22,18 @@ swift test
 
 1. Provide a `SearchablePaginatedDataSource` for the same `Entity` type.
 2. Provide a matching `SearchViewFactory`.
-3. Bind a `SearchViewModel` to `SearchView`.
+3. Create a `TMDBClient` instance.
+4. Bind a `SearchViewModel` to `SearchView`, passing `tmdbClient`.
 
 The TV-series example factory lives at:
 
 `Sources/TMDBUXLib/SearchView/TVSeries/TVSeriesSearchViewFactory.swift`
+
+Child views rendered inside `SearchView` can access the shared client via:
+
+```swift
+@Environment(\.tmdbClient) private var tmdbClient
+```
 
 ## Documentation
 

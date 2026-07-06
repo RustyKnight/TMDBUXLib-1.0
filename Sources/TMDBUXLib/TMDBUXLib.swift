@@ -14,6 +14,7 @@
 /// - ``SearchViewModeling``
 /// - ``SearchViewModel``
 /// - ``SearchView``
+/// - `EnvironmentValues.tmdbClient`
 ///
 /// Concrete search-view implementations currently live under `SearchView/`,
 /// with TV-series-specific defaults in `SearchView/TVSeries/`.
@@ -26,7 +27,7 @@ public extension TMDBUXLib {
     static let paginationUsageNote = "Call try await nextPage() sequentially, use try await refresh() to restart, and stop at .noMorePages."
 
     /// Public API usage note:
-    /// Bind `searchTerm`, call `submitSearch()`, and forward end-of-list events to
-    /// `loadNextPageIfNeeded(currentItem:)` for paginated search UI behavior.
-    static let searchViewUsageNote = "Bind searchTerm, call submitSearch(), and use loadNextPageIfNeeded(currentItem:) at list end."
+    /// Construct `SearchView` with a `TMDBClient`, bind `searchTerm`, call `submitSearch()`,
+    /// and forward end-of-list events to `loadNextPageIfNeeded(currentItem:)`.
+    static let searchViewUsageNote = "Construct SearchView with TMDBClient, bind searchTerm, call submitSearch(), and use loadNextPageIfNeeded(currentItem:) at list end."
 }

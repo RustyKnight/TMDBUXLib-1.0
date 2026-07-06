@@ -43,6 +43,14 @@
   - Prompt text is provided by caller and surfaced unchanged in search input.
   - Concrete examples include `TVSeriesSearchViewFactory` under `Sources/TMDBUXLib/SearchView/TVSeries/`.
 
+## Entity: SearchViewContext
+- **Purpose**: Shared construction-time dependencies required by `SearchView` and its composed children.
+- **Core fields**:
+  - `tmdbClient: TMDBClient`
+- **Validation rules**:
+  - `tmdbClient` is required and non-optional at `SearchView` initialization.
+  - Child content receives `tmdbClient` via `EnvironmentValues.tmdbClient`.
+
 ## Entity: SearchSelectionEvent<Entity>
 - **Purpose**: Output event representing user choice.
 - **Core fields**:

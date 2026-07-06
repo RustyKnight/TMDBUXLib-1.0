@@ -101,6 +101,7 @@ As a user, I can select one result from the list so the calling flow can continu
 - **FR-015**: The system MUST render each result row using caller-provided item view definitions.
 - **FR-016**: The system MUST expose caller-provided search prompt text in the search input.
 - **FR-017**: The system MUST allow selection of exactly one result item at a time.
+- **FR-018**: The system MUST require a non-optional `TMDBClient` when constructing `SearchView` and expose it to composed child views.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -109,6 +110,7 @@ As a user, I can select one result from the list so the calling flow can continu
 - **Search Result Item**: A single returned record that can be displayed and selected.
 - **Paginated Search Source**: Caller-supplied provider responsible for first-page and next-page retrieval plus page-availability status.
 - **Search View Factory**: Caller-supplied provider that defines state-based body content, result-row content, and search prompt text.
+- **Search View Context**: Required dependencies supplied at `SearchView` construction, including a non-optional `TMDBClient` shared with child content.
 
 ## Success Criteria *(mandatory)*
 

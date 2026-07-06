@@ -34,8 +34,9 @@ func searchViewFactoryAndModelContractsCompile() async {
     )
     let model = SearchViewModel(dataSource: dataSource)
     let factory = SearchViewFactorySpy<FixtureEntity>(searchPrompt: "Find")
+    let tmdbClient = TMDBSearchTVClientSpy().tmdbClient
     let _: SearchView<SearchViewModel<InMemorySearchablePaginatedDataSource<FixtureEntity>>, SearchViewFactorySpy<FixtureEntity>> =
-        SearchView(viewModel: model, factory: factory)
+        SearchView(viewModel: model, factory: factory, tmdbClient: tmdbClient)
 
     #expect(model.searchTerm == "")
     #expect(factory.searchPrompt == "Find")

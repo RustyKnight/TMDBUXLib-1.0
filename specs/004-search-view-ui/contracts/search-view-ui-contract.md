@@ -6,6 +6,7 @@ This contract defines a generic SwiftUI search view surface that coordinates a s
 ## Swift Contract Shape (normative)
 ```swift
 import SwiftUI
+import TMDBLib
 
 public enum SearchViewState<Entity> {
     case noSearch
@@ -43,6 +44,15 @@ public protocol SearchViewModeling: ObservableObject {
     func loadNextPageIfNeeded(currentItem: Entity) async
     func select(item: Entity)
 }
+
+public struct SearchView<Model: SearchViewModeling, Factory: SearchViewFactory>: View
+where Model.Entity == Factory.Entity, Model.Entity: Identifiable {
+    public init(viewModel: Model, factory: Factory, tmdbClient: TMDBClient)
+}
+
+public extension EnvironmentValues {
+    var tmdbClient: TMDBClient { get set }
+}
 ```
 
 ## Behavioral Rules (normative)
@@ -59,6 +69,8 @@ public protocol SearchViewModeling: ObservableObject {
 8. Selection is single-item only: selecting one row replaces any prior selection.
 9. Emitted/selected item must be the exact data-source entity type (`MovieListResult`, `TVSeriesListResult`, or other matching `Entity`).
 10. Public naming must follow Swift conventions (camelCase, no underscores).
+11. `SearchView` construction requires a non-optional `TMDBClient`.
+12. `EnvironmentValues.tmdbClient` is non-optional inside `SearchView` composition scope.
 
 ## Compatibility Notes
 - Platform compatibility remains aligned with `Package.swift` (macOS 14+, iOS 17+, tvOS 17+, visionOS 1+).
@@ -66,6 +78,7 @@ public protocol SearchViewModeling: ObservableObject {
 
 ## Usage Notes
 - Provide a concrete `SearchablePaginatedDataSource` and matching `SearchViewFactory` for the same `Entity`.
+- Provide a concrete `TMDBClient` when constructing `SearchView`.
 - Bind search text to `searchTerm`, call `submitSearch()` for first-page retrieval, and forward row-end events to `loadNextPageIfNeeded`.
 - Use `select(item:)` to produce single-item selection suitable for host-flow continuation.
 - A ready-made TV-series factory lives at `Sources/TMDBUXLib/SearchView/TVSeries/TVSeriesSearchViewFactory.swift`.
